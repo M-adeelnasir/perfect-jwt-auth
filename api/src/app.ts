@@ -5,7 +5,7 @@ import Routes from './routes'
 import { deserialize } from './middleware/deserialize.session'
 const app = express()
 
-app.use(cors())
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
 app.use(cookieParser())
 app.use(express.json())
 app.use(deserialize)

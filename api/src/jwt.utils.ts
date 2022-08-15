@@ -24,14 +24,16 @@ s9c/Ge/XwSCADQpJbEr+UbiCmCQF9bznMQ/WyjFNjIZOe3/KbOGRqPCKTvYmk4EH
 
 //jwt sign
 export function jwtSign(payload: object, expiresIn: number | string) {
-  const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn })
+  const token = jwt.sign(payload, privateKey, { expiresIn })
   return token
 }
 
 //jwt verify
 export async function verifyToken(token: string) {
   try {
-    const decoded = jwt.verify(token, publicKey)
+    const decoded = await jwt.verify(token, privateKey)
+
+    console.log(decoded)
 
     return { valid: true, expired: false, decoded }
   } catch (err: any) {

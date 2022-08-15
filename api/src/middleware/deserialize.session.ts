@@ -11,10 +11,12 @@ export async function deserialize(
   if (!accessToken) return next()
 
   const { decoded } = await verifyToken(accessToken)
+  console.log('This', decoded)
 
   if (decoded) {
     //@ts-ignore
     req.user = decoded
+
     return next()
   }
   next()
