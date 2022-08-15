@@ -22,8 +22,12 @@ export async function createSessionHandler(req: Request, res: Response) {
     httpOnly: true,
   })
 
-  const { expired, decoded, valid } = await verifyToken(accessToken)
-
   //decode the user and send to client
   res.status(200).send({ user: user?.email, name: user?.name, accessToken })
+}
+
+export function getSeessionHanlder(req: Request, res: Response) {
+  //@ts-ignore
+  const user = req.user
+  res.send(user)
 }
