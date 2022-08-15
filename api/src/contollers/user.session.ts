@@ -31,3 +31,12 @@ export function getSeessionHanlder(req: Request, res: Response) {
   const user = req.user
   res.send(user)
 }
+
+export function deleteSession(req: Request, res: Response) {
+  //@ts-ignore
+  res.cookie('accessToken', '', {
+    maxAge: 0,
+    httpOnly: true,
+  })
+  res.send({ success: true })
+}
