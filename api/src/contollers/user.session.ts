@@ -9,4 +9,5 @@ export async function createSessionHandler(req: Request, res: Response) {
   if (user && user.password !== password) {
     return res.status(401).send('invalid email or password')
   }
+  //create access token
 }

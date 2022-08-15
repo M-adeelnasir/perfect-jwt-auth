@@ -22,7 +22,24 @@ s9c/Ge/XwSCADQpJbEr+UbiCmCQF9bznMQ/WyjFNjIZOe3/KbOGRqPCKTvYmk4EH
 4+RYATzmxfX7nlV2kwIDAQAB
 -----END PUBLIC KEY-----`
 
+//jwt sign
 export function jwtSign(payload: object, expiresIn: number | string) {
   const token = jwt.sign(payload, privateKey, { algorithm: 'RS256', expiresIn })
   return token
+}
+
+//jwt verify
+export async function decodeJwt(token: string) {
+  try {
+    const decoded = await jwt.verify(token, publicKey)
+
+    return { valid: true, expired: false, decoded }
+  } catch (err: any) {
+    return {
+      valid: true,
+      //ts-ignore
+      expired: err.message === 'jwt expired',
+      decoded: null,
+    }
+  }
 }
