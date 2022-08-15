@@ -29,9 +29,9 @@ export function jwtSign(payload: object, expiresIn: number | string) {
 }
 
 //jwt verify
-export async function decodeJwt(token: string) {
+export async function verifyToken(token: string) {
   try {
-    const decoded = await jwt.verify(token, publicKey)
+    const decoded = jwt.verify(token, publicKey)
 
     return { valid: true, expired: false, decoded }
   } catch (err: any) {
